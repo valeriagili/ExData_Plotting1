@@ -16,11 +16,18 @@ hpc_data$datetime <- strptime(paste(hpc_data$Date,hpc_data$Time), format = "%d/%
 
 ## Open PNG device: create "plot3.png" of 480 pixels times 480 pixels (default values)
 #  in working directory
-png(filename = "plot2.png")
+png(filename = "plot3.png")
 
 ## Create histogram
-with(hpc_data, plot(datetime, Global_active_power, type = "l", 
-                    xlab = "", ylab = "Global Active Power (kilowatts)"))
+with(hpc_data, plot(datetime, Sub_metering_1, type = "l",
+                    xlab = "", ylab = "Energy sub metering"))
+with(hpc_data, points(datetime, Sub_metering_2, type = "l", col = "red"))
+with(hpc_data, points(datetime, Sub_metering_3, type = "l", col = "blue"))
+
+
+## Add legend
+legend("topright", lty = "solid", col = c("black", "red", "blue"),  legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
 
 ## Close the PNG file device
 dev.off()
